@@ -1,0 +1,53 @@
+.Container aside{
+    background-color:#fff;
+    width: 320px;
+    border-radius: 3px;
+    padding:30px 20px;
+}
+
+aside h5{
+    font-size: 20px;
+    text-align: center;
+    display:block;
+    color:#333;
+}
+aside form {
+    margin-top:30px;
+}
+aside label{
+    font-size: 14px;
+    font-weight: 700;
+    color:#acacac;
+    display:block;
+}
+aside input{
+    width:100%;
+    height:32px;
+    border:none;
+    border-bottom: solid 1px #acacac;
+    font-size:14px;
+}
+aside .input-block + .input-block{
+    margin-top:20px;
+}
+aside .coords{
+    margin-top:20px;
+    display: grid;
+    gap:20px;
+    grid-template-columns: 1fr 1fr;
+}
+aside .coords .input-block{
+    margin-top:0;
+}
+
+aside button[type="submit"]{
+    width:100%;
+    margin-top:40px;
+    background-color: #000;
+    color:#fff;
+    font-size: 14px;
+    text-transform: uppercase;
+    border:none;
+    padding:20px 0;
+    cursor:pointer;
+}
