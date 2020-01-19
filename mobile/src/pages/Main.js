@@ -6,6 +6,7 @@ import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location'
 
 import Form from './components/Form'
 import api from '../services/api'
+import { connect, disconnect, subscribeToNewUsers } from '../services/socket'
 
 
 function Main({ navigation }){
@@ -33,6 +34,18 @@ function Main({ navigation }){
         loadInitPosition()
     }, [])
 
+    useEffect(()=>{
+        subscribeToNewUsers(user => setUsers([...users, user]))
+    }, [users])
+
+    function setupWebSocket(techs){
+        disconnect()
+
+        const { latitude, longitude } = currentLocation
+        
+        connect(latitude, longitude, techs)
+    }
+
     async function loadUsers({search}){
         const { latitude, longitude } = currentLocation
 
@@ -44,10 +57,10 @@ function Main({ navigation }){
             }
         })
         setUsers(response.data.returnSearch)
+        setupWebSocket(search)
     }
 
     function handleLocationChanged(region){
-        console.log(region)
         setCurrentLocation(region)
     }
 

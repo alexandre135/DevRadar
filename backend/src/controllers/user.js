@@ -1,6 +1,7 @@
 const axios = require('axios')
 const user = require('../models/user')
 const stringToArray = require('../utils/stringToArray')
+const { findConnections, sendMessage } = require('../webSocket')
 
 module.exports ={
     async getAll(req, res){
@@ -34,6 +35,12 @@ module.exports ={
                 techs: arrayTechs,
                 location
             })
+
+            //filtra conexoes para websocket
+
+            const sendSocketMessageTo = findConnections( { latitude, longitude }, arrayTechs )
+            sendMessage(sendSocketMessageTo, 'newUser', userCreate)
+
         }
         return res.status('200').json(userCreate)
     },
